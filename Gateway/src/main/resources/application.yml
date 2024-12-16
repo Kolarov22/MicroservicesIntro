@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: Gateway
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: Course-Service
+            uri: http://localhost:8081
+            predicates:
+              - Path=/courses/**
+            filters:
+              - PrefixPath=/api/v1
+
+          - id: Grading-Service
+            uri: http://localhost:8082
+            predicates:
+              - Path=/grades/**
+            filters:
+              - PrefixPath=/api/v1
+
+          - id: Professor-Service
+            uri: http://localhost:8083
+            predicates:
+              - Path=/teachers/**
+            filters:
+              - PrefixPath=/api/v1
+
+          - id: Student-Service
+            uri: http://localhost:8084
+            predicates:
+              - Path=/students/**
+            filters:
+              - PrefixPath=/api/v1
+
+server:
+  port: 8080
